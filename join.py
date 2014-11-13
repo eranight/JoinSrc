@@ -42,20 +42,24 @@ if len(sys.argv) == 1:
 elif len(sys.argv) >= 3:
 	tabPaths = sys.argv[1:-1]
 	pathDest = sys.argv[len(sys.argv)-1]
+else:
+	print('invalid parameters, check source for explanations')
+	input('end')
+	os.exit()
 
 
-print("fichiers : ", str(tabPaths))
+print("files : ", str(tabPaths))
 
 fDest = open(pathDest, 'w+')
 
-print('dest :', fDest.name)
+print('destination :', fDest.name)
 
 tabImport = []
 tabCode = []
 
 # met le contenu des fichiers dans le tableau 
 for path in tabPaths:
-	print('examen de ', path)
+	print('processing ', path)
 	f = open(path,'r')
 
 	# pour chaque ligne : enregitrer ou passer
@@ -63,10 +67,6 @@ for path in tabPaths:
 		if ligne.startswith(prefixImport):
 			if ligne not in tabImport:
 				tabImport.append(ligne)
-			"""
-			else:
-				print("ligne d'import '", ligne, "' déjà présente")
-			"""
 		elif ligne.startswith(prefixPackage):
 			continue
 		else:
@@ -85,4 +85,4 @@ for ligne in tabCode:
 # fini
 fDest.close()
 
-input("Fin !")
+input("Done !")
